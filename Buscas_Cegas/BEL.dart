@@ -21,7 +21,7 @@ main(List<String> args) {
   //    [d]     [e]     [f]
   //   /   \       \
   //[g]     [h]     [i]
-  //
+
   //Criando Arestas
   List<Aresta> arestas = [
     Aresta(pai: a, filho: b),
@@ -45,9 +45,9 @@ main(List<String> args) {
     // Fila consistindo no nó Raiz
     Queue<No> fila = new Queue();
 
-    // Até que a fila esteja vazia ou que o nó destino tenha sido encontrado
     fila.add(raiz);
 
+    // Até que a fila esteja vazia ou que o nó destino tenha sido encontrado
     while (fila.isNotEmpty) {
       print(fila.first.toString());
       if (fila.first == busca) {

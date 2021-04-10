@@ -35,26 +35,10 @@ class Arvore {
   List<No> adjacente(No vertice) {
     List<No> contato = [];
     for (var i = 0; i < arestas.length; i++) {
-      // if (arestas[i].filho == vertice) {
-      //   contato.add(arestas[i].pai);
-      // } else
-
       if (arestas[i].pai == vertice) {
         contato.add(arestas[i].filho);
       }
     }
     return contato;
   }
-
-  // List<String> adjacente_string(No vertice) {
-  //   List<String> contato = [];
-  //   for (var i = 0; i < arestas.length; i++) {
-  //     if (arestas[i].filho == vertice) {
-  //       contato.add(arestas[i].pai.label);
-  //     } else if (arestas[i].pai == vertice) {
-  //       contato.add(arestas[i].filho.label);
-  //     }
-  //   }
-  //   return contato;
-  // }
 }

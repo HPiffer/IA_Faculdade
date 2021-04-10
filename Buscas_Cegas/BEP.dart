@@ -47,9 +47,9 @@ main(List<String> args) {
     List<No> aux = [];
     List<No> visitados = []; // Lista de nós visitados
 
-    // Até que a Pilha esteja vazia ou que o nó destino tenha sido encontrado
     pilha.add(raiz);
 
+    // Até que a Pilha esteja vazia ou que o nó destino tenha sido encontrado
     while (pilha.isNotEmpty) {
       print(pilha.first.toString());
 
@@ -63,7 +63,7 @@ main(List<String> args) {
           print('Sucesso!');
           return;
         } else {
-          // Se não for, removeno o elemento e adicionando seus filhos
+          // Se não for, remove o elemento e adicionando seus filhos
           visitados.add(pilha.first);
 
           // Salva o nó atual para inserir os filhos

@@ -19,9 +19,9 @@ main(List<String> args) {
   //        [b]     [c]
   //      1/   \4      \8
   //    [d]     [e]     [f]
-  //  6/   \7  /   \2
+  //  6/   \7      \2
   //[g]     [h]     [i]
-  //
+
   //Criando Arestas
   List<Aresta> arestas = [
     Aresta(pai: a, filho: b, distancia: 3),
@@ -48,9 +48,9 @@ main(List<String> args) {
     List<No> visitados = []; // Lista de nós visitados
     int dist = 0; // Distancia calculada
 
-    // Até que a Pilha esteja vazia ou que o nó destino tenha sido encontrado
     pilha.add(raiz);
 
+    // Até que a Pilha esteja vazia ou que o nó destino tenha sido encontrado
     while (pilha.isNotEmpty) {
       print(pilha.first.toString());
 
@@ -84,7 +84,7 @@ main(List<String> args) {
           print('Distancia = ${dist}');
           return;
         } else {
-          // Se não for, removeno o elemento e adicionando seus filhos
+          // Se não for, remove o elemento e adicionando seus filhos
           visitados.add(pilha.first);
 
           // Salva o nó atual para inserir os filhos
