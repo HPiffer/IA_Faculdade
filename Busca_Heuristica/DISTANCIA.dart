@@ -3,16 +3,19 @@ import 'arvore_valorada.dart';
 
 main(List<String> args) {
   // Criando Nós
-  var a = No("a");
-  var b = No("b");
-  var c = No("c");
-  var d = No("d");
-  var e = No("e");
-  var f = No("f");
-  var g = No("g");
-  var h = No("h");
-  var i = No("i");
-  List<No> nos = [a, b, c, d, e, f, g, h, i];
+  var a = No(label: 'a', x: 2, y: 4);
+  var b = No(label: 'b', x: 5, y: 6);
+  var c = No(label: 'c', x: 4, y: 2);
+  var d = No(label: 'd', x: 7, y: 4);
+  var g = No(label: 'g', x: 8, y: 2);
+  var h = No(label: 'h', x: 10, y: 1);
+  var n = No(label: 'n', x: 11, y: 3);
+  var s = No(label: 's', x: 13, y: 2);
+  var p = No(label: 'p', x: 12, y: 6);
+  var q = No(label: 'q', x: 11, y: 7);
+  var m = No(label: 'm', x: 9, y: 6);
+  var f = No(label: 'f', x: 7, y: 8);
+  List<No> nos = [a, b, c, d, g, h, n, s, p, q, m, f];
 
   //            [a]
   //          3/   \5
@@ -24,14 +27,20 @@ main(List<String> args) {
 
   //Criando Arestas
   List<Aresta> arestas = [
-    Aresta(pai: a, filho: b, distancia: 3),
-    Aresta(pai: b, filho: d, distancia: 1),
-    Aresta(pai: d, filho: g, distancia: 6),
-    Aresta(pai: d, filho: h, distancia: 7),
-    Aresta(pai: b, filho: e, distancia: 4),
-    Aresta(pai: e, filho: i, distancia: 2),
-    Aresta(pai: a, filho: c, distancia: 5),
-    Aresta(pai: c, filho: f, distancia: 8),
+    Aresta(pai: a, filho: b),
+    Aresta(pai: b, filho: c),
+    Aresta(pai: c, filho: d),
+    Aresta(pai: d, filho: g),
+    Aresta(pai: d, filho: n),
+    Aresta(pai: n, filho: s),
+    Aresta(pai: n, filho: h),
+    Aresta(pai: h, filho: g),
+    Aresta(pai: d, filho: q),
+    Aresta(pai: q, filho: p),
+    Aresta(pai: p, filho: s),
+    Aresta(pai: p, filho: n),
+    Aresta(pai: b, filho: m),
+    Aresta(pai: m, filho: f),
   ];
 
   //Criando Arvore
@@ -64,7 +73,7 @@ main(List<String> args) {
           print('Nó raiz');
         } else {
           print('Distancia = ${dist}');
-          dist -= arvore.distancia(arvore.getPai(pilha.first), pilha.first);
+          // dist -= arvore.distancia(arvore.getPai(pilha.first), pilha.first);
         }
 
         pilha.removeFirst();
@@ -75,7 +84,7 @@ main(List<String> args) {
           print('Nó raiz');
         } else {
           print('Distancia = ${dist}');
-          dist += arvore.distancia(arvore.getPai(pilha.first), pilha.first);
+          // dist += arvore.distancia(arvore.getPai(pilha.first), pilha.first);
         }
 
         if (pilha.first == busca) {

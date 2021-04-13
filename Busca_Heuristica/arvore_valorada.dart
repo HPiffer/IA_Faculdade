@@ -1,8 +1,16 @@
 //* Classe Nó
-class No {
-  String label;
+import 'dart:math';
 
-  No(this.label);
+class No {
+  final String label;
+  final int x;
+  final int y;
+
+  No({
+    required this.label,
+    required this.x,
+    required this.y,
+  });
 
   @override
   String toString() {
@@ -14,13 +22,18 @@ class No {
 class Aresta {
   final No pai;
   final No filho;
-  final int distancia;
+  double distancia = 0;
 
   Aresta({
     required this.pai,
     required this.filho,
-    required this.distancia,
-  });
+  }) {
+    this.distancia = calculaDistancia();
+  }
+
+  double calculaDistancia() {
+    return sqrt(pow(this.filho.x - pai.x, 2) + pow(this.filho.y - pai.y, 2));
+  }
 }
 
 //* Classe Arvore
@@ -34,8 +47,8 @@ class Arvore {
   });
 
   // Distancia
-  int distancia(No pai, No filho) {
-    int dist = 0;
+  double distancia(No pai, No filho) {
+    double dist = 0;
     for (var i = 0; i < arestas.length; i++) {
       if (arestas[i].pai == pai && arestas[i].filho == filho) {
         dist = arestas[i].distancia;
