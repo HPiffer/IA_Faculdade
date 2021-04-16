@@ -20,13 +20,7 @@ main(List<String> args) {
   var f = No(label: 'f', x: 7, y: 8);
   List<No> nos = [a, b, c, d, g, h, n, s, p, q, m, f];
 
-  //            [a]
-  //          3/   \5
-  //        [b]     [c]
-  //      1/   \4      \8
-  //    [d]     [e]     [f]
-  //  6/   \7      \2
-  //[g]     [h]     [i]
+  //* Olhar grafo.png ==========================================================
 
   //Criando Arestas
   List<Aresta> arestas = [
@@ -94,6 +88,7 @@ main(List<String> args) {
           // Se for p primeiro elemento da Pilha
           print('Sucesso!');
           print('Distancia = ${dist}');
+          return;
         } else {
           // Se não for, remove o elemento e adicionando seus filhos
           visitados.add(pilha.first);
