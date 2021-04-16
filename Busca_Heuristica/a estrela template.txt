@@ -1,0 +1,22 @@
+@Override
+public void buscar() {
+    Estado<?> eCorrente = eInicial;
+    while ((eCorrente != null) && (!eCorrente.equals(eObjetivo))) {
+        List<?> eSucessores = eCorrente.getSucessores();			
+        for (Estado<?> estado : (List<Estado<?>>) eSucessores)
+            eAbertos.push(estado);
+        Collections.sort((List<Estado<?>>) eAbertos, new OrdenarPorCustoMaisAvaliacao());
+        Collections.reverse((List<Estado<?>>) eAbertos);
+        eCorrente = eAbertos.pop();
+    }
+    // Se o laço foi encerrado por um estado válido ...
+    if (eCorrente != null) {
+        // então construímos o caminho da solução (da folha atá a raiz)
+        caminho.add(eCorrente);
+        while (eCorrente.getAncestral() != null) {
+            eCorrente = eCorrente.getAncestral();
+            caminho.add(eCorrente);
+        }
+        Collections.reverse(caminho);
+    }		
+}

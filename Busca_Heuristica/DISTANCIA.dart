@@ -2,6 +2,9 @@ import 'dart:collection';
 import 'arvore_valorada.dart';
 
 main(List<String> args) {
+  //Variaveis de controle
+  var resultado;
+
   // Criando Nós
   var a = No(label: 'a', x: 2, y: 4);
   var b = No(label: 'b', x: 5, y: 6);
@@ -49,15 +52,15 @@ main(List<String> args) {
     arestas: arestas,
   );
 
-  //Busca em Largura
-  busca_em_largura(Arvore arvore, No raiz, No busca) {
+  //Busca algoritmo A*
+  busca_a_estrela(Arvore arvore, No origem, No destino) {
     // Pilha consistindo no nó Raiz
     Queue<No> pilha = new Queue();
     List<No> aux = [];
     List<No> visitados = []; // Lista de nós visitados
-    int dist = 0; // Distancia calculada
+    double dist = 0; // Distancia calculada
 
-    pilha.add(raiz);
+    pilha.add(origem);
 
     // Até que a Pilha esteja vazia ou que o nó destino tenha sido encontrado
     while (pilha.isNotEmpty) {
@@ -73,7 +76,7 @@ main(List<String> args) {
           print('Nó raiz');
         } else {
           print('Distancia = ${dist}');
-          // dist -= arvore.distancia(arvore.getPai(pilha.first), pilha.first);
+          dist -= arvore.distancia(arvore.getPai(pilha.first), pilha.first);
         }
 
         pilha.removeFirst();
@@ -84,14 +87,13 @@ main(List<String> args) {
           print('Nó raiz');
         } else {
           print('Distancia = ${dist}');
-          // dist += arvore.distancia(arvore.getPai(pilha.first), pilha.first);
+          dist += arvore.distancia(arvore.getPai(pilha.first), pilha.first);
         }
 
-        if (pilha.first == busca) {
+        if (pilha.first == destino) {
           // Se for p primeiro elemento da Pilha
           print('Sucesso!');
           print('Distancia = ${dist}');
-          return;
         } else {
           // Se não for, remove o elemento e adicionando seus filhos
           visitados.add(pilha.first);
@@ -107,5 +109,8 @@ main(List<String> args) {
     }
   }
 
-  busca_em_largura(arvore, a, g);
+  //Busca algoritmo Guloso
+  void busca_gulosa(Arvore arvore, No origem, No destino) {}
+
+  busca_a_estrela(arvore, a, g);
 }

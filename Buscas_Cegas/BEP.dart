@@ -41,7 +41,7 @@ main(List<String> args) {
   );
 
   //Busca em Largura
-  busca_em_largura(Arvore arvore, No raiz, No busca) {
+  busca_em_profundidade(Arvore arvore, No raiz, No busca) {
     // Pilha consistindo no nó Raiz
     Queue<No> pilha = new Queue();
     List<No> aux = [];
@@ -78,5 +78,5 @@ main(List<String> args) {
     }
   }
 
-  busca_em_largura(arvore, a, h);
+  busca_em_profundidade(arvore, a, h);
 }
