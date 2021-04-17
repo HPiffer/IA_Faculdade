@@ -1,9 +1,10 @@
 import 'dart:collection';
+import 'dart:io';
 import 'arvore_valorada.dart';
 
 main(List<String> args) {
   //Variaveis de controle
-  var resultado;
+  bool resultado = false;
 
   // Criando Nós
   var a = No(label: 'a', x: 2, y: 4);
@@ -38,6 +39,7 @@ main(List<String> args) {
     Aresta(pai: p, filho: n),
     Aresta(pai: b, filho: m),
     Aresta(pai: m, filho: f),
+    Aresta(pai: f, filho: q),
   ];
 
   //Criando Arvore
@@ -46,13 +48,25 @@ main(List<String> args) {
     arestas: arestas,
   );
 
+  // Calcula Distancia
+  double calculaDistancia(Arvore arvore, Queue<No> pilha) {
+    No trueFirst = pilha.first;
+    pilha.removeFirst();
+    double value = 0;
+    while (pilha.isNotEmpty) {
+      value += arvore.distancia(pilha.first, trueFirst);
+      trueFirst = pilha.first;
+      pilha.removeFirst();
+    }
+    return value;
+  }
+
   //Busca algoritmo A*
   busca_a_estrela(Arvore arvore, No origem, No destino) {
     // Pilha consistindo no nó Raiz
     Queue<No> pilha = new Queue();
     List<No> aux = [];
     List<No> visitados = []; // Lista de nós visitados
-    double dist = 0; // Distancia calculada
 
     pilha.add(origem);
 
@@ -68,9 +82,6 @@ main(List<String> args) {
         if (arvore.getPai(pilha.first) == null) {
           // É o nó raiz
           print('Nó raiz');
-        } else {
-          print('Distancia = ${dist}');
-          dist -= arvore.distancia(arvore.getPai(pilha.first), pilha.first);
         }
 
         pilha.removeFirst();
@@ -79,15 +90,13 @@ main(List<String> args) {
         if (arvore.getPai(pilha.first) == null) {
           // É o nó raiz
           print('Nó raiz');
-        } else {
-          print('Distancia = ${dist}');
-          dist += arvore.distancia(arvore.getPai(pilha.first), pilha.first);
         }
 
         if (pilha.first == destino) {
           // Se for p primeiro elemento da Pilha
           print('Sucesso!');
-          print('Distancia = ${dist}');
+          resultado = true;
+          print(calculaDistancia(arvore, pilha));
           return;
         } else {
           // Se não for, remove o elemento e adicionando seus filhos
@@ -102,10 +111,109 @@ main(List<String> args) {
         }
       }
     }
+    if (resultado == false) {
+      print('Não se pode chegar até $destino a partir de $origem');
+    }
   }
 
   //Busca algoritmo Guloso
-  void busca_gulosa(Arvore arvore, No origem, No destino) {}
+  void busca_gulosa(Arvore arvore, No origem, No destino) {
+    //Fila iniciando no nó origem
+    Queue<No> pilha = new Queue();
+    List<No> visitados = []; // Lista de nós visitados
+    List<No> filhos = [];
+    List<No> filhosOrdenados = [];
 
-  busca_a_estrela(arvore, a, g);
+    pilha.add(origem);
+
+    //Até que a fila esteja vazia ou que o nó destino tenha sido encontrado
+    while (pilha.isNotEmpty) {
+      print(pilha.first.toString());
+
+      //Verifica se o nó ja foi visitado
+      if (visitados.contains(pilha.first)) {
+        print('Remove ${pilha.first.toString()}');
+
+        // Subtrai distância
+        if (arvore.getPai(pilha.first) == null) {
+          // É o nó raiz
+          print('Nó raiz');
+        }
+
+        pilha.removeFirst();
+      } else {
+        // Adiciona distância
+        if (arvore.getPai(pilha.first) == null) {
+          // É o nó raiz
+          print('Nó raiz');
+        }
+
+        if (pilha.first == destino) {
+          // Se for o primeiro elemento da fila
+          print('Sucesso!');
+          resultado = true;
+          print(calculaDistancia(arvore, pilha));
+          return;
+        } else {
+          // Se não for, marca o nó como visitado e adiciona seus filhos
+          visitados.add(pilha.first);
+          // print('Pilha atual $pilha');
+
+          //Adiciona o menor filho na pilha
+          filhos = arvore.getFilhos(pilha.first);
+          // print('Buscou filhos $filhos');
+
+          //Busca o filho com a menor distancia
+          filhosOrdenados = arvore.menorDistancia(pilha.first, filhos);
+          // print('Filhos ordenados $filhosOrdenados');
+          for (var i = filhosOrdenados.length; i > 0; i--) {
+            pilha.addFirst(filhosOrdenados[i - 1]);
+          }
+        }
+      }
+    }
+    if (resultado == false) {
+      print('Não se pode chegar até $destino a partir de $origem');
+    }
+  }
+
+  //Funcao para leitura
+  print("========================================");
+  print("===== Selecione um metodo de busca =====");
+  print("[1] - Método A* \n[2] - Método Guloso");
+  var metodoBusca = stdin.readLineSync().toString();
+  print("===== Digite uma cidade de origem ======");
+  var inputOrigem = stdin.readLineSync().toString();
+  print("===== Digite uma cidade de destino =====");
+  var inputDestino = stdin.readLineSync().toString();
+  print("========================================");
+  //Atribuindo um tipo especifico a variavel
+  //var idade = int.parse(input);
+
+  var cidadeOrigem, cidadeDestino;
+
+  for (var i = 0; i < arvore.vertices.length; i++) {
+    if (arvore.vertices[i].label == inputOrigem) {
+      cidadeOrigem = arvore.vertices[i];
+    }
+    if (arvore.vertices[i].label == inputDestino) {
+      cidadeDestino = arvore.vertices[i];
+    }
+  }
+
+  if (cidadeOrigem == null || cidadeDestino == null) {
+    print('PREENCHE DIREITO DESGRAÇA');
+    print('CIDADE N EXISTE');
+  } else {
+    if (metodoBusca == '1') {
+      busca_a_estrela(arvore, cidadeOrigem, cidadeDestino);
+    } else if (metodoBusca == '2') {
+      busca_gulosa(arvore, cidadeOrigem, cidadeDestino);
+    } else {
+      print(
+        'Valor errado, reinicia o programa aê'
+        'pq eu to com preguiça de fazer um while!',
+      );
+    }
+  }
 }

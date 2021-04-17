@@ -58,14 +58,34 @@ class Arvore {
     return dist;
   }
 
+  List<No> menorDistancia(No pai, List<No> filhos) {
+    List<No> filhosOrdenados = [];
+    No menorFilho = pai; // Pq a distancia é 0
+    double menorDistancia = 0;
+
+    // Se lista n for vazia
+    int num = filhos.length;
+    for (var j = 0; j < num; j++) {
+      for (var i = 0; i < filhos.length; i++) {
+        if (menorDistancia == 0 || distancia(pai, filhos[i]) < menorDistancia) {
+          menorDistancia = distancia(pai, filhos[i]);
+          menorFilho = filhos[i];
+          // print('Filho[i] = ${filhos[i]}');
+        }
+      }
+      filhosOrdenados.add(menorFilho);
+      // print('adicionando ordenados $filhosOrdenados');
+      filhos.remove(menorFilho);
+      menorDistancia = 0;
+    }
+
+    return filhosOrdenados;
+  }
+
   // Lista de nós filhos
   List<No> getFilhos(No vertice) {
     List<No> contato = [];
     for (var i = 0; i < arestas.length; i++) {
-      // if (arestas[i].filho == vertice) {
-      //   contato.add(arestas[i].pai);
-      // } else
-
       if (arestas[i].pai == vertice) {
         contato.add(arestas[i].filho);
       }
