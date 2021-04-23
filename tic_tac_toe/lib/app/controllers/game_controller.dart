@@ -25,7 +25,6 @@ class GameController {
     movesPlayer1.clear();
     movesPlayer2.clear();
     currentPlayer = PlayerType.player1;
-    isSinglePlayer = false;
     tiles =
         List<BoardTile>.generate(BOARD_SIZE, (index) => BoardTile(index + 1));
   }

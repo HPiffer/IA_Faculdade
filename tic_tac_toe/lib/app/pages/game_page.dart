@@ -27,7 +27,7 @@ class _GamePageState extends State<GamePage> {
     });
   }
 
-  // Usuário clica no campo
+  //* Usuário clica no campo
   _onMarkTile(int index) {
     // Verifica se o campo está disponível
     if (!_controller.tiles[index].enable) return;
@@ -41,6 +41,7 @@ class _GamePageState extends State<GamePage> {
     _checkWinner();
   }
 
+  //* Verifica ganhador
   _checkWinner() {
     var winner = _controller.checkWinner();
     if (winner == WinnerPlayer.none) {
@@ -58,6 +59,7 @@ class _GamePageState extends State<GamePage> {
     }
   }
 
+  //* Pop up de ganhador
   _showWinnerDialog(String symbol) {
     showDialog(
       context: context,
@@ -72,6 +74,7 @@ class _GamePageState extends State<GamePage> {
     );
   }
 
+  //* Pop up de empate
   _showTiedDialog() {
     showDialog(
       context: context,
@@ -94,7 +97,18 @@ class _GamePageState extends State<GamePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(GAME_TITLE),
-        centerTitle: true,
+        actions: [
+          IconButton(
+            icon: _controller.isSinglePlayer
+                ? Icon(Icons.person)
+                : Icon(Icons.group),
+            onPressed: () {
+              setState(() {
+                _controller.isSinglePlayer = !_controller.isSinglePlayer;
+              });
+            },
+          ),
+        ],
       ),
       body: Container(
         child: Column(
@@ -135,28 +149,24 @@ class _GamePageState extends State<GamePage> {
               ),
             ),
             Divider(),
-            SwitchListTile(
-              title: Text(
-                _controller.isSinglePlayer ? 'Singleplayer' : 'Multiplayer',
-              ),
-              secondary:
-                  Icon(_controller.isSinglePlayer ? Icons.person : Icons.group),
-              value: _controller.isSinglePlayer,
-              onChanged: (value) {
-                setState(() {
-                  _controller.isSinglePlayer = value;
-                });
-              },
+            SizedBox(height: 10),
+            Text(
+              _controller.isSinglePlayer ? 'Singleplayer' : 'Multiplayer',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontWeight: FontWeight.bold),
             ),
+            SizedBox(height: 10),
             Divider(),
             Padding(
               padding: const EdgeInsets.all(20),
               child: TextButton(
                 onPressed: _onResetGame,
-                child: Text(RESET_BUTTON_LABEL),
+                child: Text(
+                  RESET_BUTTON_LABEL,
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
               ),
             ),
-            // _buildResetButton(),
           ],
         ),
       ),

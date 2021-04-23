@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: GAME_TITLE,
       theme: myThemeData(),
+      debugShowCheckedModeBanner: false,
       home: GamePage(),
     );
   }
@@ -23,8 +24,11 @@ class MyApp extends StatelessWidget {
     return ThemeData(
       //* Define Brightness, Density and Colors.
       brightness: Brightness.light,
+
       visualDensity: VisualDensity.adaptivePlatformDensity,
-      primarySwatch: Colors.amber,
+
+      primarySwatch: Colors.deepPurple,
+
       buttonTheme: ButtonThemeData(
         height: 52,
         textTheme: ButtonTextTheme.primary,
