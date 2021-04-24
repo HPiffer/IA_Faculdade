@@ -1,6 +1,6 @@
 class Move {
-  int score;
-  int index;
+  int score; // Pontuação para validação do Minimax
+  int index; // Indice para retorno
 
   Move({
     this.score = 0,

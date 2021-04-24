@@ -12,8 +12,8 @@ class GameController {
   }
 
   // Verifica se o jogo acabou
-  bool isEndState(List<String> s) {
-    var temp = findResult(s);
+  bool isEndState(List<String> game) {
+    var temp = findResult(game);
     if (temp == -1) return false;
     return true;
   }
