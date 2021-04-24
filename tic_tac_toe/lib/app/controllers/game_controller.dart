@@ -90,7 +90,58 @@ class GameController {
   }
 
   // Minimax
-  Move minimax(List<String> game, int depth, isMinimiser) {
+  // Move minimax(List<String> game, int depth, isMinimiser) {
+  //   if (isEndState(game)) {
+  //     return Move(
+  //       score: getScore(game, depth),
+  //       index: -1,
+  //     );
+  //   }
+
+  //   // Verifica o tipo de Execução MIN || MAX
+  //   if (isMinimiser) {
+  //     // Executa minimiser
+  //     Move min = new Move(score: 1000, index: -1);
+  //     for (int i = 0; i < BOARD_SIZE; i++) {
+  //       if (game[i] == '') {
+  //         game[i] = PLAYER1_SYMBOL;
+
+  //         Move value = minimax(game, depth + 1, false);
+  //         if (value.score < min.score) {
+  //           min.score = value.score;
+  //           min.index = i;
+  //         }
+  //         game[i] = '';
+  //       }
+  //     }
+  //     return min;
+  //   } else {
+  //     // Executa maximiser
+  //     Move max = new Move(score: -1000, index: -1);
+
+  //     for (int i = 0; i < BOARD_SIZE; i++) {
+  //       if (game[i] == '') {
+  //         game[i] = PLAYER2_SYMBOL;
+
+  //         Move value = minimax(game, depth + 1, true);
+  //         if (value.score > max.score) {
+  //           max.score = value.score;
+  //           max.index = i;
+  //         }
+  //         game[i] = '';
+  //       }
+  //     }
+  //     return max;
+  //   }
+  // }
+
+  Move minimax({
+    required List<String> game,
+    required int depth,
+    required double alpha,
+    required double beta,
+    required bool isMinimiser,
+  }) {
     if (isEndState(game)) {
       return Move(
         score: getScore(game, depth),
@@ -106,12 +157,26 @@ class GameController {
         if (game[i] == '') {
           game[i] = PLAYER1_SYMBOL;
 
-          Move curr = minimax(game, depth + 1, false);
-          if (curr.score < min.score) {
-            min.score = curr.score;
+          Move value = minimax(
+            game: game,
+            depth: depth + 1,
+            alpha: alpha,
+            beta: beta,
+            isMinimiser: false,
+          );
+
+          if (beta > value.score) {
+            beta = value.score.toDouble();
+          }
+          if (value.score < min.score) {
+            min.score = value.score;
             min.index = i;
           }
           game[i] = '';
+          if (beta <= alpha) {
+            print('PODA ESSA MERDA');
+            break;
+          }
         }
       }
       return min;
@@ -123,12 +188,26 @@ class GameController {
         if (game[i] == '') {
           game[i] = PLAYER2_SYMBOL;
 
-          Move curr = minimax(game, depth + 1, true);
-          if (curr.score > max.score) {
-            max.score = curr.score;
+          Move value = minimax(
+            game: game,
+            depth: depth + 1,
+            alpha: alpha,
+            beta: beta,
+            isMinimiser: true,
+          );
+
+          if (alpha < value.score) {
+            alpha = value.score.toDouble();
+          }
+          if (value.score > max.score) {
+            max.score = value.score;
             max.index = i;
           }
           game[i] = '';
+          if (beta <= alpha) {
+            print('PODA ESSA MERDA');
+            break;
+          }
         }
       }
       return max;

@@ -71,7 +71,14 @@ class _GamePageState extends State<GamePage> {
   // Movimentação da IA
   gameMove() {
     if (!gameOver) {
-      Move best = _controller.minimax(game, 0, true);
+      // Move best = _controller.minimax(game, 0, true);
+      Move best = _controller.minimax(
+        game: game,
+        depth: 0,
+        alpha: double.negativeInfinity,
+        beta: double.infinity,
+        isMinimiser: true,
+      );
       print('IA Jogou -> ${best.index}');
 
       setState(() {
