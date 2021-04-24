@@ -10,8 +10,5 @@ const String PLAYER2_SYMBOL = 'O';
 
 const String GAME_TITLE = 'Tic Tac Toe';
 const String TIED_TITLE = 'Jogo Empatado!';
-const String WIN_TITLE = 'Jogador [SYMBOL] ganhou!';
-const String DIALOG_MESSAGE = 'Aperte o botão de reiniciar para jogar denovo!';
-const String SINGLE_PLAYER_MODE_LABEL = 'Single Player';
-const String MULTIPLAYER_MODEL_LABEL = 'Two Players';
-const String RESET_BUTTON_LABEL = 'RESET';
+const String USER_WON_TITLE = 'Você ganhou!';
+const String IA_WON_TITLE = 'Você perdeu!';
