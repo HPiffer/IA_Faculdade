@@ -83,7 +83,7 @@ class _GamePageState extends State<GamePage> {
     }
   }
 
-  // UI Components
+  // UI Component
   Widget getTile(int index, String text) {
     return Container(
       // decoration: BoxDecoration(border: getBorders(index)),
@@ -98,58 +98,6 @@ class _GamePageState extends State<GamePage> {
         ),
       ),
     );
-  }
-
-  Border getBorders(int index) {
-    switch (index) {
-      case 0:
-        return Border(
-          bottom: BorderSide(width: 2, color: Colors.deepPurple),
-          right: BorderSide(width: 2, color: Colors.deepPurple),
-        );
-      case 1:
-        return Border(
-          bottom: BorderSide(width: 2, color: Colors.deepPurple),
-          left: BorderSide(width: 2, color: Colors.deepPurple),
-          right: BorderSide(width: 2, color: Colors.deepPurple),
-        );
-      case 2:
-        return Border(
-          bottom: BorderSide(width: 2, color: Colors.deepPurple),
-          left: BorderSide(width: 2, color: Colors.deepPurple),
-        );
-      case 3:
-        return Border(
-          top: BorderSide(width: 2, color: Colors.deepPurple),
-          bottom: BorderSide(width: 2, color: Colors.deepPurple),
-          right: BorderSide(width: 2, color: Colors.deepPurple),
-        );
-      case 4:
-        return Border.all(width: 2, color: Colors.deepPurple);
-      case 5:
-        return Border(
-          top: BorderSide(width: 2, color: Colors.deepPurple),
-          bottom: BorderSide(width: 2, color: Colors.deepPurple),
-          left: BorderSide(width: 2, color: Colors.deepPurple),
-        );
-      case 6:
-        return Border(
-          top: BorderSide(width: 2, color: Colors.deepPurple),
-          right: BorderSide(width: 2, color: Colors.deepPurple),
-        );
-      case 7:
-        return Border(
-          top: BorderSide(width: 2, color: Colors.deepPurple),
-          left: BorderSide(width: 2, color: Colors.deepPurple),
-          right: BorderSide(width: 2, color: Colors.deepPurple),
-        );
-      case 8:
-        return Border(
-          top: BorderSide(width: 2, color: Colors.deepPurple),
-          left: BorderSide(width: 2, color: Colors.deepPurple),
-        );
-    }
-    return Border.all(width: 2, color: Colors.deepPurple);
   }
 
   // =========================================== //
