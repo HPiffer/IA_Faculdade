@@ -145,19 +145,16 @@ class _GamePageState extends State<GamePage> {
                     ),
                   ),
                 ),
-                Opacity(
-                  opacity: gameOver ? 1.0 : 0.0,
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                      bottom: 32.0,
-                    ),
-                    child: GestureDetector(
-                      onTap: () {
-                        reset();
-                      },
-                      child: Text('Clique Aqui para Jogar Novamente',
-                          style: TextStyle(fontSize: 24)),
-                    ),
+                Padding(
+                  padding: EdgeInsets.only(
+                    bottom: 32.0,
+                  ),
+                  child: GestureDetector(
+                    onTap: () {
+                      reset();
+                    },
+                    child: Text('Clique Aqui para Reiniciar',
+                        style: TextStyle(fontSize: 24)),
                   ),
                 ),
               ],

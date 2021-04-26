@@ -89,52 +89,6 @@ class GameController {
     return 0;
   }
 
-  // Minimax
-  // Move minimax(List<String> game, int depth, isMinimiser) {
-  //   if (isEndState(game)) {
-  //     return Move(
-  //       score: getScore(game, depth),
-  //       index: -1,
-  //     );
-  //   }
-
-  //   // Verifica o tipo de Execução MIN || MAX
-  //   if (isMinimiser) {
-  //     // Executa minimiser
-  //     Move min = new Move(score: 1000, index: -1);
-  //     for (int i = 0; i < BOARD_SIZE; i++) {
-  //       if (game[i] == '') {
-  //         game[i] = PLAYER1_SYMBOL;
-
-  //         Move value = minimax(game, depth + 1, false);
-  //         if (value.score < min.score) {
-  //           min.score = value.score;
-  //           min.index = i;
-  //         }
-  //         game[i] = '';
-  //       }
-  //     }
-  //     return min;
-  //   } else {
-  //     // Executa maximiser
-  //     Move max = new Move(score: -1000, index: -1);
-
-  //     for (int i = 0; i < BOARD_SIZE; i++) {
-  //       if (game[i] == '') {
-  //         game[i] = PLAYER2_SYMBOL;
-
-  //         Move value = minimax(game, depth + 1, true);
-  //         if (value.score > max.score) {
-  //           max.score = value.score;
-  //           max.index = i;
-  //         }
-  //         game[i] = '';
-  //       }
-  //     }
-  //     return max;
-  //   }
-  // }
-
   Move minimax({
     required List<String> game,
     required int depth,
