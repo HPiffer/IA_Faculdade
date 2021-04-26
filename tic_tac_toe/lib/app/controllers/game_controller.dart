@@ -11,13 +11,6 @@ class GameController {
       return IA_WON_TITLE;
   }
 
-  // Verifica se o jogo acabou
-  bool isEndState(List<String> game) {
-    var temp = findResult(game);
-    if (temp == -1) return false;
-    return true;
-  }
-
   // Verifica o estado atual do jogo
   int findResult(List<String> game) {
     //? -1 = JOGO AINDA NÃO ACABOU
@@ -51,17 +44,14 @@ class GameController {
       }
     }
 
-    // Verifica Diagonal Principal
+    // Verifica Diagonal Principal e Secundaria
     if (game[0] == game[4] && game[4] == game[8] && game[0] != '') {
       if (game[0] == PLAYER2_SYMBOL) {
         return 1;
       } else if (game[0] == PLAYER1_SYMBOL) {
         return 2;
       }
-    }
-
-    // Verifica Diagonal Secundaria
-    else if (game[2] == game[4] && game[4] == game[6] && game[2] != '') {
+    } else if (game[2] == game[4] && game[4] == game[6] && game[2] != '') {
       if (game[2] == PLAYER2_SYMBOL) {
         return 1;
       } else if (game[2] == PLAYER1_SYMBOL) {
@@ -77,6 +67,13 @@ class GameController {
     // Se não existem espaços vazios e o jogo acabou
     // retorna como empate
     return 0;
+  }
+
+  // Verifica se o jogo acabou
+  bool isEndState(List<String> game) {
+    var temp = findResult(game);
+    if (temp == -1) return false;
+    return true;
   }
 
   // Busca pela pontuação do Minimax
