@@ -143,13 +143,21 @@ class _GamePageState extends State<GamePage> {
                   padding: EdgeInsets.only(
                     bottom: 32.0,
                   ),
-                  child: GestureDetector(
-                    onTap: () {
-                      reset();
-                    },
-                    child: Text(
-                      'Clique Aqui para Reiniciar',
-                      style: TextStyle(fontSize: 24),
+                  child: TextButton(
+                    onPressed: () => reset(),
+                    child: Container(
+                      margin: const EdgeInsets.all(3),
+                      padding: const EdgeInsets.all(15),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.deepPurple),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(30),
+                        ),
+                      ),
+                      child: Text(
+                        'Clique Aqui para Reiniciar',
+                        style: TextStyle(fontSize: 24),
+                      ),
                     ),
                   ),
                 ),
