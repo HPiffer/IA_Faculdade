@@ -12,12 +12,6 @@ class GamePage extends StatefulWidget {
   _GamePageState createState() => _GamePageState();
 }
 
-// 1 Player Game
-// User goes first and uses 'O'
-// Game goes second and uses 'X'
-// result = 0 -> Tie
-// result = 1 -> Player won
-// result = 2 -> Game won
 class _GamePageState extends State<GamePage> {
   // =========================================== //
   // Declarations
@@ -153,8 +147,10 @@ class _GamePageState extends State<GamePage> {
                     onTap: () {
                       reset();
                     },
-                    child: Text('Clique Aqui para Reiniciar',
-                        style: TextStyle(fontSize: 24)),
+                    child: Text(
+                      'Clique Aqui para Reiniciar',
+                      style: TextStyle(fontSize: 24),
+                    ),
                   ),
                 ),
               ],
@@ -186,7 +182,12 @@ class _GamePageState extends State<GamePage> {
                 onClick(index);
               }
             },
-            child: Center(child: getTile(index, game[index])),
+            child: Center(
+              child: getTile(
+                index,
+                game[index],
+              ),
+            ),
           ),
         );
       },
